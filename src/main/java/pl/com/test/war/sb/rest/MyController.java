@@ -6,7 +6,9 @@ package pl.com.test.war.sb.rest;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.com.test.war.sb.domain.Person;
 import pl.com.test.war.sb.repository.PersonRepository;
@@ -49,5 +51,14 @@ public class MyController {
     @RequestMapping("/rest/person/name/{name}")
     public List<Person> findPersonByName(@PathVariable String name) {
         return personRepository.findByNameLike(name);
+    }
+    
+    
+    @RequestMapping(value = "/rest/save", method = RequestMethod.POST)
+    public Person save(@RequestBody Person person) {
+        
+        personRepository.save(person);
+        
+        return person;
     }
 }
