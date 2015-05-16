@@ -5,6 +5,11 @@
  */
 package pl.com.test.war.sb.domain;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -12,8 +17,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Administrator
  */
 @XmlRootElement
-public class Person {
+@Entity
+@SuppressWarnings("PersistenceUnitPresent")
+public class Person implements Serializable {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String lastName;
 
@@ -32,6 +42,15 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     
     
     
